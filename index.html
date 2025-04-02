@@ -9,7 +9,8 @@
     <script>
 
         const choices = ['Rock', 'Paper', 'Scissors'];
-
+        let humanScore = computerScore = 0;
+        
         function getComputerChoice() {
             let indexChoice = Math.floor(Math.random() * choices.length);
             const computerChoice = choices[indexChoice];
@@ -20,6 +21,7 @@
             const humanChoice = prompt("Enter your strategy.", "");
             return humanChoice;
         }
+
 
     </script>
 </body>
