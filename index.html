@@ -7,7 +7,16 @@
 </head>
 <body>
     <script>
-        console.log("Hello World!");
+
+        const choices = ['Rock', 'Paper', 'Scissors'];
+
+        function getComputerChoice() {
+            let indexChoice = Math.floor(Math.random() * choices.length);
+            const computerChoice = choices[indexChoice];
+            return computerChoice;
+        }
+
+        console.log(getComputerChoice());
     </script>
 </body>
 </html>
