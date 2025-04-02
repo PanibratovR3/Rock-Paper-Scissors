@@ -9,7 +9,8 @@
     <script>
 
         const choices = ['Rock', 'Paper', 'Scissors'];
-        let humanScore = computerScore = 0;
+        let humanScore = 0;
+        let computerScore = 0;
         
         function getComputerChoice() {
             let indexChoice = Math.floor(Math.random() * choices.length);
@@ -22,7 +23,43 @@
             return humanChoice;
         }
 
+        function playRound(humanChoice, computerChoice) {
+            if (humanChoice.toLowerCase() === 'Rock'.toLowerCase()) {
+                if (computerChoice.toLowerCase() === 'Rock'.toLowerCase()) {
+                    console.log("Tie!");
+                } else if (computerChoice.toLowerCase() === 'Paper'.toLowerCase()) {
+                    console.log("You lose! Paper beats Rock.");
+                    ++computerScore;
+                } else if (computerChoice.toLowerCase() === 'Scissors'.toLowerCase()) {
+                    console.log("You win! Rock beats Scissors.");
+                    ++humanScore;
+                }
+            } else if (humanChoice.toLowerCase() === 'Paper'.toLowerCase()) {
+                if (computerChoice.toLowerCase() === 'Rock'.toLowerCase()) {
+                    console.log("You win! Paper beats Rock.");
+                    ++humanScore;
+                } else if (computerChoice.toLowerCase() === 'Paper'.toLowerCase()) {
+                    console.log("Tie!");
+                } else if (computerChoice.toLowerCase() === 'Scissors'.toLowerCase()) {
+                    console.log("You lose! Scissors beats Paper.");
+                    ++computerScore;
+                }                
+            } else if (humanChoice.toLowerCase() == 'Scissors') {
+                if (computerChoice.toLowerCase() === 'Rock'.toLowerCase()) {
+                    console.log("You lose! Rock beats Scissors.");
+                    ++computerScore;
+                } else if (computerChoice.toLowerCase() === 'Paper'.toLowerCase()) {
+                    console.log("You win! Scissors beats paper.");
+                    ++humanScore;
+                } else if (computerChoice.toLowerCase() === 'Scissors'.toLowerCase()) {
+                    console.log("Tie!");
+                }                
+            }
+        }
 
+        const humanSelection = getHumanChoice();
+        const computerSelection = getComputerChoice();
+        playRound(humanSelection, computerSelection);
     </script>
 </body>
 </html>
