@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock-Paper-Scissors</title>
+    <link rel="stylesheet" href="Style.css">
 </head>
 <body>
     <div class="control">
@@ -19,6 +20,7 @@
         const choices = ['Rock', 'Paper', 'Scissors'];
         let humanScore = 0;
         let computerScore = 0;
+        let endGame = false;
         
         function getComputerChoice() {
             let indexChoice = Math.floor(Math.random() * choices.length);
@@ -95,9 +97,11 @@
             }
             playerScoreField.textContent = `Player: ${humanScore}`;
             computerScoreField.textContent = `Computer: ${computerScore}`;
-            if (humanScore === 5) {
+            if (humanScore === 5 && !endGame) {
                 winnerField.textContent = "You win!";
-            } else if (computerScore === 5) {
+                endGame = true;
+            } else if (computerScore === 5 && !endGame) {
+                endGame = true;
                 winnerField.textContent = "Computer wins!";
             }
         }
