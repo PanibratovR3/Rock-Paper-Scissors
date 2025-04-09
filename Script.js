@@ -75,12 +75,10 @@ function playRound(humanChoice, computerChoice) {
   if (humanScore === 5) {
     winnerField.classList.add("player-win");
     winnerField.textContent = "You win the game!";
-    endGame = true;
     buttons.forEach((button) =>
       button.removeEventListener("click", startRound)
     );
   } else if (computerScore === 5) {
-    endGame = true;
     winnerField.classList.add("computer-win");
     winnerField.textContent = "Computer wins the game!";
     buttons.forEach((button) =>
