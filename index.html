@@ -7,13 +7,30 @@
     <link rel="stylesheet" href="Style.css">
 </head>
 <body>
+    <div class="header">
+        <h1>Rock-Paper-Scissors</h1>
+        <p>Choose your strategy!</p>
+    </div>
+    <div class="rules">
+        <p>Press any button below to start round. One who gets 5 points wins the game.</p>
+    </div>
     <div class="control">
         <button id="rock">&#129704;</button>
         <button id="paper">&#128220;</button>
         <button id="scissors">&#9986;&#65039;</button>
     </div>
-    <div class="player score"></div>
-    <div class="computer score"></div>
+    <div class="scores-container">
+        <div class="item">
+            <p>Player</p>
+            <div class="player score"></div>
+        </div>
+        <div class="item">
+            <p>Computer</p>
+            <div class="computer score"></div>
+        </div>
+    </div>
+    
+    <div class="round-winner"></div>
     <div class="winner"></div>
     <script>
 
@@ -34,75 +51,81 @@
         // }
 
         const buttons = document.querySelectorAll(".control > button");
+        function startRound(event) {
+            humanChoice = event.target.id;
+            computerChoice = getComputerChoice();
+            playRound(humanChoice, computerChoice);
+        }
         buttons.forEach(button => {
-            button.addEventListener("click", (event) => {
-                humanChoice = event.target.id;
-                computerChoice = getComputerChoice();
-                playRound(humanChoice, computerChoice);
-            })
+            button.addEventListener("click", startRound);
         });
         
         function playRound(humanChoice, computerChoice) {
             const playerScoreField = document.querySelector(".player");
             const computerScoreField = document.querySelector(".computer");
             const winnerField = document.querySelector(".winner");
+            const roundWinnerField = document.querySelector(".round-winner");
             if (humanChoice.toLowerCase() === 'Rock'.toLowerCase()) {
                 if (computerChoice.toLowerCase() === 'Rock'.toLowerCase()) {
                     console.log("Player: Rock");
                     console.log("Computer: Rock");
-                    console.log("Tie!");
+                    roundWinnerField.textContent = 'Tie!'
                 } else if (computerChoice.toLowerCase() === 'Paper'.toLowerCase()) {
                     console.log("Player: Rock");
                     console.log("Computer: Paper");
-                    console.log("You lose! Paper beats Rock.");
+                    roundWinnerField.textContent = "You lose! Paper beats Rock."
                     ++computerScore;
                 } else if (computerChoice.toLowerCase() === 'Scissors'.toLowerCase()) {
                     console.log("Player: Rock");
                     console.log("Computer: Scissors");
-                    console.log("You win! Rock beats Scissors.");
+                    roundWinnerField.textContent = "You win! Rock beats Scissors.";
                     ++humanScore;
                 }
             } else if (humanChoice.toLowerCase() === 'Paper'.toLowerCase()) {
                 if (computerChoice.toLowerCase() === 'Rock'.toLowerCase()) {
                     console.log("Player: Paper");
                     console.log("Computer: Rock");
-                    console.log("You win! Paper beats Rock.");
+                    roundWinnerField.textContent = "You win! Paper beats Rock.";
                     ++humanScore;
                 } else if (computerChoice.toLowerCase() === 'Paper'.toLowerCase()) {
                     console.log("Player: Paper");
                     console.log("Computer: Paper");
-                    console.log("Tie!");
+                    roundWinnerField.textContent = "Tie!";
                 } else if (computerChoice.toLowerCase() === 'Scissors'.toLowerCase()) {
                     console.log("Player: Paper");
                     console.log("Computer: Scissors");
-                    console.log("You lose! Scissors beats Paper.");
+                    roundWinnerField.textContent = "You lose! Scissors beats Paper.";
                     ++computerScore;
                 }                
             } else if (humanChoice.toLowerCase() === 'Scissors'.toLowerCase()) {
                 if (computerChoice.toLowerCase() === 'Rock'.toLowerCase()) {
                     console.log("Player: Scissors");
                     console.log("Computer: Rock");
-                    console.log("You lose! Rock beats Scissors.");
+                    roundWinnerField.textContent = "You lose! Rock beats Scissors."
                     ++computerScore;
                 } else if (computerChoice.toLowerCase() === 'Paper'.toLowerCase()) {
                     console.log("Player: Scissors");
                     console.log("Computer: Paper");
-                    console.log("You win! Scissors beats paper.");
+                    roundWinnerField.textContent = "You win! Scissors beats paper."
                     ++humanScore;
                 } else if (computerChoice.toLowerCase() === 'Scissors'.toLowerCase()) {
                     console.log("Player: Scissors");
                     console.log("Computer: Scissors");
-                    console.log("Tie!");
+                    roundWinnerField.textContent = "Tie!";
                 }                
             }
-            playerScoreField.textContent = `Player: ${humanScore}`;
-            computerScoreField.textContent = `Computer: ${computerScore}`;
+            playerScoreField.textContent = `${humanScore}`;
+            computerScoreField.textContent = `${computerScore}`;
             if (humanScore === 5 && !endGame) {
-                winnerField.textContent = "You win!";
+                winnerField.classList.add("player-win");
+                winnerField.textContent = "You win the game!";
                 endGame = true;
+                buttons.forEach(button => button.removeEventListener("click", startRound));
             } else if (computerScore === 5 && !endGame) {
                 endGame = true;
-                winnerField.textContent = "Computer wins!";
+                winnerField.classList.add("computer-win");
+                winnerField.textContent = "Computer wins the game!";
+                buttons.forEach(button => button.removeEventListener("click", startRound));
             }
         }
 
