@@ -12,7 +12,7 @@
         <p>Choose your strategy!</p>
     </div>
     <div class="rules">
-        <p>Press any button below to start round. One who gets 5 points wins the game.</p>
+        <p>Press any button below to start round. One, who gets 5 points, wins the game.</p>
     </div>
     <div class="control">
         <button id="rock">&#129704;</button>
@@ -41,7 +41,7 @@
         
         function getComputerChoice() {
             let indexChoice = Math.floor(Math.random() * choices.length);
-            const computerChoice = choices[indexChoice];
+            const computerChoice = choices[indexChoice].toLowerCase();
             return computerChoice;
         }
 
@@ -65,55 +65,103 @@
             const computerScoreField = document.querySelector(".computer");
             const winnerField = document.querySelector(".winner");
             const roundWinnerField = document.querySelector(".round-winner");
-            if (humanChoice.toLowerCase() === 'Rock'.toLowerCase()) {
-                if (computerChoice.toLowerCase() === 'Rock'.toLowerCase()) {
-                    console.log("Player: Rock");
-                    console.log("Computer: Rock");
-                    roundWinnerField.textContent = 'Tie!'
-                } else if (computerChoice.toLowerCase() === 'Paper'.toLowerCase()) {
-                    console.log("Player: Rock");
-                    console.log("Computer: Paper");
-                    roundWinnerField.textContent = "You lose! Paper beats Rock."
-                    ++computerScore;
-                } else if (computerChoice.toLowerCase() === 'Scissors'.toLowerCase()) {
-                    console.log("Player: Rock");
-                    console.log("Computer: Scissors");
-                    roundWinnerField.textContent = "You win! Rock beats Scissors.";
-                    ++humanScore;
-                }
-            } else if (humanChoice.toLowerCase() === 'Paper'.toLowerCase()) {
-                if (computerChoice.toLowerCase() === 'Rock'.toLowerCase()) {
-                    console.log("Player: Paper");
-                    console.log("Computer: Rock");
-                    roundWinnerField.textContent = "You win! Paper beats Rock.";
-                    ++humanScore;
-                } else if (computerChoice.toLowerCase() === 'Paper'.toLowerCase()) {
-                    console.log("Player: Paper");
-                    console.log("Computer: Paper");
-                    roundWinnerField.textContent = "Tie!";
-                } else if (computerChoice.toLowerCase() === 'Scissors'.toLowerCase()) {
-                    console.log("Player: Paper");
-                    console.log("Computer: Scissors");
-                    roundWinnerField.textContent = "You lose! Scissors beats Paper.";
-                    ++computerScore;
-                }                
-            } else if (humanChoice.toLowerCase() === 'Scissors'.toLowerCase()) {
-                if (computerChoice.toLowerCase() === 'Rock'.toLowerCase()) {
-                    console.log("Player: Scissors");
-                    console.log("Computer: Rock");
-                    roundWinnerField.textContent = "You lose! Rock beats Scissors."
-                    ++computerScore;
-                } else if (computerChoice.toLowerCase() === 'Paper'.toLowerCase()) {
-                    console.log("Player: Scissors");
-                    console.log("Computer: Paper");
-                    roundWinnerField.textContent = "You win! Scissors beats paper."
-                    ++humanScore;
-                } else if (computerChoice.toLowerCase() === 'Scissors'.toLowerCase()) {
-                    console.log("Player: Scissors");
-                    console.log("Computer: Scissors");
-                    roundWinnerField.textContent = "Tie!";
-                }                
+            switch (humanChoice) {
+                case 'rock':
+                    switch (computerChoice) {
+                        case 'rock':
+                            roundWinnerField.textContent = 'Tie!'
+                        break;
+                        case 'paper':
+                            roundWinnerField.textContent = "You lose! Paper beats Rock."
+                            ++computerScore;
+                        break;
+                        case 'scissors':
+                            roundWinnerField.textContent = "You win! Rock beats Scissors.";
+                            ++humanScore;
+                        break;                            
+                    };    
+                break;
+                case 'paper':
+                    switch (computerChoice) {
+                        case 'rock':
+                            roundWinnerField.textContent = "You win! Paper beats Rock.";
+                            ++humanScore;
+                        break;
+                        case 'paper':
+                            roundWinnerField.textContent = "Tie!";
+                        break;
+                        case 'scissors':
+                            roundWinnerField.textContent = "You lose! Scissors beats Paper.";
+                            ++computerScore;
+                        break;                            
+                    };                     
+                break;
+                case 'scissors':
+                switch (computerChoice) {
+                    case 'rock':
+                        roundWinnerField.textContent = "You lose! Rock beats Scissors."
+                        ++computerScore;
+                    break;
+                    case 'paper':
+                        roundWinnerField.textContent = "You win! Scissors beats paper."
+                        ++humanScore;
+                    break;
+                    case 'scissors':
+                        roundWinnerField.textContent = "Tie!";
+                    break;                            
+                };                
+                break;
             }
+                
+            // if (humanChoice.toLowerCase() === 'Rock'.toLowerCase()) {
+            //     if (computerChoice.toLowerCase() === 'Rock'.toLowerCase()) {
+            //         console.log("Player: Rock");
+            //         console.log("Computer: Rock");
+            //         roundWinnerField.textContent = 'Tie!'
+            //     } else if (computerChoice.toLowerCase() === 'Paper'.toLowerCase()) {
+            //         console.log("Player: Rock");
+            //         console.log("Computer: Paper");
+            //         roundWinnerField.textContent = "You lose! Paper beats Rock."
+            //         ++computerScore;
+            //     } else if (computerChoice.toLowerCase() === 'Scissors'.toLowerCase()) {
+            //         console.log("Player: Rock");
+            //         console.log("Computer: Scissors");
+            //         roundWinnerField.textContent = "You win! Rock beats Scissors.";
+            //         ++humanScore;
+            //     }
+            // } else if (humanChoice.toLowerCase() === 'Paper'.toLowerCase()) {
+            //     if (computerChoice.toLowerCase() === 'Rock'.toLowerCase()) {
+            //         console.log("Player: Paper");
+            //         console.log("Computer: Rock");
+            //         roundWinnerField.textContent = "You win! Paper beats Rock.";
+            //         ++humanScore;
+            //     } else if (computerChoice.toLowerCase() === 'Paper'.toLowerCase()) {
+            //         console.log("Player: Paper");
+            //         console.log("Computer: Paper");
+            //         roundWinnerField.textContent = "Tie!";
+            //     } else if (computerChoice.toLowerCase() === 'Scissors'.toLowerCase()) {
+            //         console.log("Player: Paper");
+            //         console.log("Computer: Scissors");
+            //         roundWinnerField.textContent = "You lose! Scissors beats Paper.";
+            //         ++computerScore;
+            //     }                
+            // } else if (humanChoice.toLowerCase() === 'Scissors'.toLowerCase()) {
+            //     if (computerChoice.toLowerCase() === 'Rock'.toLowerCase()) {
+            //         console.log("Player: Scissors");
+            //         console.log("Computer: Rock");
+            //         roundWinnerField.textContent = "You lose! Rock beats Scissors."
+            //         ++computerScore;
+            //     } else if (computerChoice.toLowerCase() === 'Paper'.toLowerCase()) {
+            //         console.log("Player: Scissors");
+            //         console.log("Computer: Paper");
+            //         roundWinnerField.textContent = "You win! Scissors beats paper."
+            //         ++humanScore;
+            //     } else if (computerChoice.toLowerCase() === 'Scissors'.toLowerCase()) {
+            //         console.log("Player: Scissors");
+            //         console.log("Computer: Scissors");
+            //         roundWinnerField.textContent = "Tie!";
+            //     }                
+            // }
             playerScoreField.textContent = `${humanScore}`;
             computerScoreField.textContent = `${computerScore}`;
             if (humanScore === 5 && !endGame) {
