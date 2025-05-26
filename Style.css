@@ -76,3 +76,22 @@ button {
 .computer-win {
     color: red;
 }
+
+.footer {
+    text-align: center;
+    font-size: 1.7rem;
+}
+
+.info {
+    background-color: chartreuse;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    border: 1px solid black;
+    color: black;
+    font-weight: bold;
+}
+
+a:visited {
+    color: black;
+}
