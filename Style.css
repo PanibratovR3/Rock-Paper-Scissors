@@ -102,3 +102,20 @@ button {
 a:visited {
     color: black;
 }
+
+.options {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.restart {
+    font-size: 1.1rem;
+    max-width: 140px;
+    max-height: 70px;
+    margin: 20px;
+    text-align: center;
+    background-color: forestgreen;
+    color: white;
+    border-radius: 10px;
+}

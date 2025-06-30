@@ -1,6 +1,10 @@
 const choices = ["Rock", "Paper", "Scissors"];
 let humanScore = 0;
 let computerScore = 0;
+let buttonStrategyListeners = true;
+
+document.querySelector(".player.score").textContent = humanScore;
+document.querySelector(".computer.score").textContent = computerScore;
 
 function getComputerChoice() {
   let indexChoice = Math.floor(Math.random() * choices.length);
@@ -27,7 +31,7 @@ function playRound(humanChoice, computerChoice) {
     case "rock":
       switch (computerChoice) {
         case "rock":
-          roundWinnerField.textContent = "Tie!";
+          roundWinnerField.textContent = "Tie! Both players have chosen rock.";
           break;
         case "paper":
           roundWinnerField.textContent = "You lose! Paper beats Rock.";
@@ -46,7 +50,7 @@ function playRound(humanChoice, computerChoice) {
           ++humanScore;
           break;
         case "paper":
-          roundWinnerField.textContent = "Tie!";
+          roundWinnerField.textContent = "Tie! Both players have chosen paper.";
           break;
         case "scissors":
           roundWinnerField.textContent = "You lose! Scissors beats Paper.";
@@ -65,7 +69,8 @@ function playRound(humanChoice, computerChoice) {
           ++humanScore;
           break;
         case "scissors":
-          roundWinnerField.textContent = "Tie!";
+          roundWinnerField.textContent =
+            "Tie! Both players have chosen scissors.";
           break;
       }
       break;
@@ -73,16 +78,39 @@ function playRound(humanChoice, computerChoice) {
   playerScoreField.textContent = `${humanScore}`;
   computerScoreField.textContent = `${computerScore}`;
   if (humanScore === 5) {
+    if (winnerField.classList.contains("computer-win")) {
+      winnerField.classList.remove("computer-win");
+    }
     winnerField.classList.add("player-win");
     winnerField.textContent = "You win the game!";
     buttons.forEach((button) =>
       button.removeEventListener("click", startRound)
     );
+    buttonStrategyListeners = false;
   } else if (computerScore === 5) {
+    if (winnerField.classList.contains("player-win")) {
+      winnerField.classList.remove("player-win");
+    }
     winnerField.classList.add("computer-win");
     winnerField.textContent = "Computer wins the game!";
     buttons.forEach((button) =>
       button.removeEventListener("click", startRound)
     );
+    buttonStrategyListeners = false;
   }
 }
+
+const restartButton = document.querySelector(".restart");
+restartButton.addEventListener("click", () => {
+  humanScore = 0;
+  computerScore = 0;
+  document.querySelector(".round-winner").textContent = "";
+  document.querySelector(".winner").textContent = "";
+  document.querySelector(".player.score").textContent = humanScore;
+  document.querySelector(".computer.score").textContent = computerScore;
+  if (!buttonStrategyListeners) {
+    buttons.forEach((button) => {
+      button.addEventListener("click", startRound);
+    });
+  }
+});
